@@ -2,15 +2,17 @@
 import style from "../styles/SideBar.module.css";
 import LogoBox from "./LogoBox";
 import AppNav from "./AppNav";
-import City from "./City";
+// import City from "./City";
 import Footer from "./Footer";
+import CityList from "./CityList";
+// import AddCityForm from "./AddCityForm";
 function SideBar() {
     return (
         <div className={style.sideBar}>
             <LogoBox />
             <AppNav />
-            {/* <CityList /> */}
-            <City />
+            <CityList />
+            {/* <City /> */}
             {/* <AddCityForm /> */}
             <Footer />
         </div>

@@ -12,15 +12,20 @@
 }
 
 .loginPage .loginSection > div {
-    display: flex;
     width: 70%;
+    display: flex;
     overflow: hidden;
     border-radius: 0.5rem;
     margin: 0 auto;
 }
 
-.loginImage {
+.imageContainer {
     width: 100%;
+}
+
+.imageContainer img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -53,6 +58,7 @@
 
 .formContainer form {
     width: 100%;
+    margin-top: 1.5rem;
 }
 
 .formContainer form button {
@@ -63,5 +69,5 @@
 }
 
 .formContainer form button:hover {
-    background-color: var(--color-main-yellow2);
+    background-color: var(--color-main-yellow);
 }

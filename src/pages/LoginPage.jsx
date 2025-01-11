@@ -8,11 +8,14 @@ function LoginPage() {
             <Nav />
             <main className={style.loginSection}>
                 <div>
+                    <div className={style.imageContainer}>
                     <img
-                        className={style.loginImage}
+                        // className={style.loginImage}
                         src="./login.jpg"
                         alt="loading.."
                     />
+                    </div>
+                
                     <div className={style.formContainer}>
                         <div className="logoBox">
                             <Logo /> <span>TravelBook</span>
