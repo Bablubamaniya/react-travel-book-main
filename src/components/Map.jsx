@@ -1,8 +1,11 @@
 // import React from 'react'
+import style from "../styles/Map.module.css"
 
 function Map() {
   return (
-    <div>Map</div>
+    <div className={style.map}>
+        Map
+        </div>
   )
 }
 

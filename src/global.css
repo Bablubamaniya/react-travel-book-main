@@ -2,10 +2,11 @@
 
 :root {
     --color-main-yellow: #fcc419;
-    --color-main-yellow2: #fcc319e8;
+    --color-main-yellow-faded: #fcc31930;
 
     --color-white: #f4f4f5;
     --color-black: #343a40;
+    --color-grey: #868e96;
 
     --radius-sm: 0.4rem;
     --max-width: 60rem;
@@ -21,8 +22,10 @@ html {
     margin: 0;
     box-sizing: border-box;
     font-family: inherit;
-    transition: all 0.3s;
+    transition: all 0.2s;
+    font-size: inherit;
     color: inherit;
+    scrollbar-width: thin;
 }
 
 body {
@@ -43,7 +46,7 @@ textarea {
     width: 100%;
     padding: 0.8rem 1.2rem;
     font-family: inherit;
-    font-size: 1.6rem;
+    /* font-size: 1.6rem; */
     border: none;
     border-radius: 5px;
     transition: all 0.2s;
@@ -70,11 +73,10 @@ a {
     align-items: center;
     justify-content: flex-start;
     background-color: #f8f9fa;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1rem;
     border-radius: var(--radius-sm);
     gap: 0.2rem;
     width: fit-content;
-    margin-bottom: 1rem;
     border: 1px solid #fcc419;
 }
 
@@ -84,5 +86,5 @@ a {
 }
 
 .logoBox img {
-    height: 4rem;
+    height: 4rem !important;
 }

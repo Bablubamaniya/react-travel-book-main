@@ -6,26 +6,26 @@ import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
 
 import {
-    BrowserRouter,
+  //  BrowserRouter,
     createBrowserRouter,
-    Route,
+  //  Route,
     RouterProvider,
-    Routes,
+   // Routes,
 } from "react-router";
 
-const AppRoutesV1 = function () {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route index element={<HomePage />} />
-                <Route path="/product" element={<ProductPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/app" element={<AppPage />} />
-                <Route path="*" element={<ErrorPage />} />
-            </Routes>
-        </BrowserRouter>
-    );
-};
+// const AppRoutesV1 = function () {
+//     return (
+//         <BrowserRouter>
+//             <Routes>
+//                 <Route index element={<HomePage />} />
+//                 <Route path="/product" element={<ProductPage />} />
+//                 <Route path="/login" element={<LoginPage />} />
+//                 <Route path="/app" element={<AppPage />} />
+//                 <Route path="*" element={<ErrorPage />} />
+//             </Routes>
+//         </BrowserRouter>
+//     );
+// };
 
 const AppRoutesV2 = createBrowserRouter([
     { path: "/", element: <HomePage /> },
