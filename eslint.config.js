@@ -33,5 +33,5 @@ export default [
             "react-refresh/only-export-components": "off",
             "no-unused-vars": "warn",
         },
-      }
-      ]
+    },
+];
