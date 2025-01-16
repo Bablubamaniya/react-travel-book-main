@@ -40,13 +40,19 @@ const AppRoutesV2 = createBrowserRouter([
     { path: "/", element: <HomePage /> },
     { path: "/product", element: <ProductPage /> },
     { path: "/login", element: <LoginPage /> },
-    { path: "/app", element: <AppPage /> },
+    { path: "/app", element: <AppPage />,
+            children:[
+              { index: true, element: <Navigate replace to="cities" /> },  
+              { path: "cities",element: <CityList />},
+              { path: "countries",element: <CountryList />}
+            ]
+     },
     { path: "*", element: <ErrorPage /> },
 ]);
 
 function App() {
-    return <AppRoutesV1 />;
-    // return <RouterProvider router={AppRoutesV2} />;
+    // return <AppRoutesV1 />;
+    return <RouterProvider router={AppRoutesV2} />;
 }
 
 export default App;

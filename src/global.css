@@ -23,7 +23,7 @@ html {
     margin: 0;
     box-sizing: border-box;
     font-family: inherit;
-    transition: all 0.2s;
+    /* transition: all 0.2s; */
     font-size: inherit;
     color: inherit;
     scrollbar-width: thin;
