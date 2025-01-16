@@ -15,6 +15,7 @@ import {
     RouterProvider,
    Routes,
 } from "react-router";
+import { CitiesProvider } from "./context/CityContext";
 
 const AppRoutesV1 = function () {
     return (
@@ -40,7 +41,7 @@ const AppRoutesV2 = createBrowserRouter([
     { path: "/", element: <HomePage /> },
     { path: "/product", element: <ProductPage /> },
     { path: "/login", element: <LoginPage /> },
-    { path: "/app", element: <AppPage />,
+    { path: "/app", element: <CitiesProvider><AppPage /></CitiesProvider>,
             children:[
               { index: true, element: <Navigate replace to="cities" /> },  
               { path: "cities",element: <CityList />},

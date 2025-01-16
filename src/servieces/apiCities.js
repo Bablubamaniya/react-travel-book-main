@@ -14,7 +14,7 @@ export async function getCities() {
     return data;
 }
 
-export async function gerCity(id) {
+export async function getCity(id) {
     const resorse = await fetch(`${baseUrl}/cities/${id}`,{
         method: 'GET',
     });
@@ -32,8 +32,8 @@ export async function createCity(newCity) {
     return data;
 }
 
-export async function updateCity(updateCity) {
-    const resorse = await fetch(`${baseUrl}/cities`,{
+export async function updateCity(updateCity,id) {
+    const resorse = await fetch(`${baseUrl}/cities/${id}`,{
         method: 'PATCH',
         headers: {'Content-Type':"application/json"},
         body: updateCity,
