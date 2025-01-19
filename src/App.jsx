@@ -5,17 +5,18 @@ import ProductPage from "./pages/ProductPage";
 import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
 import CityList from "./components/CityList";
-import CountryList from "./components/CountryList"
+import CountryList from "./components/CountryList";
 import { Navigate } from "react-router";
 
 import {
-   BrowserRouter,
+    BrowserRouter,
     createBrowserRouter,
-   Route,
+    Route,
     RouterProvider,
-   Routes,
+    Routes,
 } from "react-router";
 import { CitiesProvider } from "./context/CityContext";
+import AddCityForm from "./components/AddCityForm";
 
 const AppRoutesV1 = function () {
     return (
@@ -25,10 +26,10 @@ const AppRoutesV1 = function () {
                 <Route path="/product" element={<ProductPage />} />
                 <Route path="/login" element={<LoginPage />} />
 
-                <Route path="/app" element={<AppPage />} >
-                <Route index element = {<Navigate replace to ="cities"/>}/>
-                        <Route path="cities" element = {<CityList />}/>
-                        <Route path="countries" element = {<CountryList />}/>
+                <Route path="/app" element={<AppPage />}>
+                    <Route index element={<Navigate replace to="cities" />} />
+                    <Route path="cities" element={<CityList />} />
+                    <Route path="countries" element={<CountryList />} />
                 </Route>
 
                 <Route path="*" element={<ErrorPage />} />
@@ -41,13 +42,20 @@ const AppRoutesV2 = createBrowserRouter([
     { path: "/", element: <HomePage /> },
     { path: "/product", element: <ProductPage /> },
     { path: "/login", element: <LoginPage /> },
-    { path: "/app", element: <CitiesProvider><AppPage /></CitiesProvider>,
-            children:[
-              { index: true, element: <Navigate replace to="cities" /> },  
-              { path: "cities",element: <CityList />},
-              { path: "countries",element: <CountryList />}
-            ]
-     },
+    {
+        path: "/app",
+        element: (
+            <CitiesProvider>
+                <AppPage />
+            </CitiesProvider>
+        ),
+        children: [
+            { index: true, element: <Navigate replace to="cities" /> },
+            { path: "cities", element: <CityList /> },
+            { path: "countries", element: <CountryList /> },
+            { path: "form", element: <AddCityForm /> },
+        ],
+    },
     { path: "*", element: <ErrorPage /> },
 ]);
 
