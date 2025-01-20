@@ -2,11 +2,16 @@
 
 import Emoji from "./Emoji";
 
-function LoginForm() {
+function SignUpForm() {
     return (
         <>
-            <h1>Get Started <Emoji txt="✈️"/></h1>
+            <h1>Creat New Account <Emoji txt="✈️"/></h1>
             <form>
+                <div>
+                    <label htmlFor="name">Name</label>
+                    <input type="text" id="name" />
+                </div>
+
                 <div>
                     <label htmlFor="email">Email</label>
                     <input type="email" id="email" />
@@ -17,10 +22,10 @@ function LoginForm() {
                     <input type="password" id="password" />
                 </div>
 
-                <button>Login</button>
+                <button>SignUp</button>
             </form>
         </>
     );
 }
 
-export default LoginForm;
+export default SignUpForm;

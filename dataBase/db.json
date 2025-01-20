@@ -240,5 +240,19 @@
           },
           "id": 20
       }
+  ],
+  "users": [
+    {
+        "name":"Arpit Jsna",
+        "email": "arpitjana@gmail.com",
+        "password": "password123",
+        "id": 1
+    },
+    {
+        "name":"Bablu Bamaniya",
+        "email": "bamaniybablu428@gmail.com",
+        "password": "password124",
+        "id": 2
+    }
   ]
 }
