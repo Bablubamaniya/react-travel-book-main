@@ -2,10 +2,22 @@
     padding: 2rem;
     font-size: 1.25rem;
     margin-top: 2rem;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .addCityForm form > div {
     margin-bottom: 2.5rem;
+}
+.emojiInputBox{
+    position: relative;
+}
+.emojiInputBox span{
+    position: absolute;
+    font-size: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
 }
 
 .addCityForm label {

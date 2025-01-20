@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import { useCities } from "../context/CityContext";
-import useQueryParams from "../hooks/UseQueryParams";
-import styles from "../styles/AddCityForm.module.css";
+import useQueryParams from "../hooks/useQueryParams";
+import styles from "../styles/addCityForm.module.css";
 import BackButton from "./BackButton";
 import Message from "./Messege";
+import { formatDateForInputValue, getFlagEmoji } from "../helper";
 import Spinner from "./Spinner";
-import { formatDate, formatDateForInputValue, getFlagEmoji } from "../helper";
 import { useNavigate } from "react-router";
 const BASE_URL = `https://api.bigdatacloud.net/data/reverse-geocode-client`;
-
 function AddCityForm() {
-    const { handleAddCity, loading: apiLoading } = useCities();
+    const { handleAddCity, loading: apiLoading, error: apiError } = useCities();
+    const [lat, lng] = useQueryParams("lat", "lng");
     const [isLoading, setIsLoading] = useState(false);
     const [cityNotFound, setCityNotFound] = useState(false);
     const [error, setError] = useState(null);
-    const [lat, lng] = useQueryParams("lat", "lng");
     const navigate = useNavigate();
-
     const [cityDetails, setCityDetails] = useState({
         cityName: "",
         country: "",
@@ -28,7 +26,6 @@ function AddCityForm() {
             lng: "",
         },
     });
-
     useEffect(
         function () {
             async function fetchCityDetails() {
@@ -38,34 +35,27 @@ function AddCityForm() {
                     const response = await fetch(url);
                     const data = await response.json();
                     const cityName = data.city;
-
-                    console.log(data);
-
                     if (!cityName) {
                         setCityNotFound(true);
                         resetCityDetails();
                         return;
                     }
-
                     setCityDetails(function (cityDetails) {
-                        const cityName = data.city || data.locality;
-
                         const updatedCityDetails = {
                             ...cityDetails,
                             cityName: data.city || data.locality,
-                            county: data.countyName,
+                            country: data.countryName,
                             emoji: getFlagEmoji(data.countryCode),
-                            note: `A note about ${cityName}`,
+                            notes: `A note about ${data.city || data.locality}`,
                             position: {
                                 lat: lat,
                                 lng: lng,
                             },
                         };
-
                         return updatedCityDetails;
                     });
                 } catch (error) {
-                    setError(error.message);
+                    setError(error.Message);
                 } finally {
                     setIsLoading(false);
                 }
@@ -74,15 +64,6 @@ function AddCityForm() {
         },
         [lat, lng]
     );
-
-    function handleDateChange(e) {
-        setCityDetails(function (cityDetails) {
-            return {
-                ...cityDetails,
-                date: new Date(e.target.value).toISOString(),
-            };
-        });
-    }
     function resetCityDetails() {
         return setCityDetails({
             cityName: "",
@@ -94,6 +75,14 @@ function AddCityForm() {
                 lat: "",
                 lng: "",
             },
+        });
+    }
+    function handleDateChange(e) {
+        setCityDetails(function (cityDetails) {
+            return {
+                ...cityDetails,
+                date: new Date(e.target.value).toISOString(),
+            };
         });
     }
     function handleNotesChange(e) {
@@ -109,32 +98,32 @@ function AddCityForm() {
     if (isLoading) {
         return <Spinner />;
     }
-
     if (!lat || !lng || cityNotFound) {
-        return <Message emoji="😯" txt="Opps! No city found!" />;
+        return <Message emoji=":hushed:" txt="Oops No City Found" />;
     }
-
-    if (error) {
-        return <Message emoji="💥" txt={error} />;
+    if (error || apiError) {
+        return <Message emoji=":boom:" txt={error} />;
     }
     return (
         <div
             className={`${styles.addCityForm} ${
-                apiLoading ? styles.deactivat : ""
+                apiLoading ? styles.deactivate : ""
             }`}
         >
-            S
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>City name</label>
+                    <div className={styles.emojiInputBox}>
                     <input
                         type="text"
                         defaultValue={cityDetails.cityName}
                         disabled={true}
                     />
+                    <span>{cityDetails.emoji}</span>
+                    </div>
                 </div>
                 <div>
-                    <label>When did you go to #cityName</label>
+                    <label>When did you go to {cityDetails.cityName}</label>
                     <input
                         type="date"
                         value={formatDateForInputValue(cityDetails.date)}
@@ -146,8 +135,8 @@ function AddCityForm() {
                     <textarea
                         rows="4"
                         cols="50"
-                        onChange={handleNotesChange}
                         value={cityDetails.notes}
+                        onChange={handleNotesChange}
                     />
                 </div>
                 <div className={styles.buttonBox}>
