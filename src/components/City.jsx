@@ -1,6 +1,6 @@
 import styles from "../styles/city.module.css";
 import { formatDate } from "../helper";
-import { GoArrowLeft } from "react-icons/go";
+// import { GoArrowLeft } from "react-icons/go";
 import BackButton from "./BackButton";
 import { useCities } from "../context/CityContext";
 import Spinner from "./Spinner";

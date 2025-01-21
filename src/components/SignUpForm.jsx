@@ -4,6 +4,7 @@ import { useState } from "react";
 import Emoji from "./Emoji";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router";
+import FormError from "./FormError";
 
 function SignUpForm() {
     const [name, setName] = useState("");
@@ -14,14 +15,16 @@ function SignUpForm() {
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
 
-    const [handleSignUp, loading] = useUser();
-
+    const { handleSignUp, loading, error } = useUser();
+    const passwordError = error.type === "password-error";
     const navigate = useNavigate();
-   async function handleSubmit(e) {
-        e.preventDefault();
-       await handleSignUp({ name: name, email: email, password: password });
-    //    navigate("/app");
 
+    async function handleSubmit(e) {
+        e.preventDefault();
+        await handleSignUp(
+            { name: name, email: email, password: password },
+            () => navigate("/app")
+        );
     }
     return (
         <>
@@ -54,7 +57,10 @@ function SignUpForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">
+                        Password{" "}
+                        {passwordError && <FormError txt={error.message} />}
+                    </label>
                     <input
                         type="password"
                         id="password"
@@ -64,6 +70,7 @@ function SignUpForm() {
                         disabled={loading}
                     />
                 </div>
+                {!passwordError && <FormError txt={error.message} />}
 
                 <button>{loading ? "Signing Up..." : "SignUp"}</button>
             </form>

@@ -34,13 +34,14 @@ const reducer = function (state, action) {
 };
 export function AuthProvider({ children }) {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [user, error, loading] = state;
+    const { user, error, loading } = state;
 
-    async function handleSignUp(newUser) {
+    async function handleSignUp(newUser, action = () => {}) {
         try {
             dispatch({ type: "loading" });
             const user = await signUpByUser(newUser);
-            dispatch({ type: "user/signup", payload: user });
+            dispatch({ type: "user/signUp", payload: user });
+            action();
         } catch (error) {
             dispatch({
                 type: "error",
@@ -49,11 +50,12 @@ export function AuthProvider({ children }) {
         }
     }
 
-    async function handleLogin(emailAddress, password) {
+    async function handleLogin({ emailAddress, password }, action = () => {}) {
         try {
             dispatch({ type: "loading" });
             const user = await loginUser(emailAddress, password);
             dispatch({ type: "user/login", payload: user });
+            action();
         } catch (error) {
             dispatch({
                 type: "error",
@@ -83,5 +85,7 @@ export function AuthProvider({ children }) {
 
 export function useUser() {
     const context = useContext(UserContext);
-    if (context === undefined) throw new Error("trying to access context outside the provider ");
+    if (context === undefined)
+        throw new Error("trying to access context outside the provider ");
+    return context;
 }
