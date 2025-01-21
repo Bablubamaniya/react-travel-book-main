@@ -17,6 +17,7 @@ function SignUpForm() {
 
     const { handleSignUp, loading, error } = useUser();
     const passwordError = error.type === "password-error";
+
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
@@ -31,7 +32,7 @@ function SignUpForm() {
             <h1>
                 Creat New Account <Emoji txt="✈️" />
             </h1>
-            <form onSubmit={handleSubmit}>
+            <form className="." onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name</label>
                     <input

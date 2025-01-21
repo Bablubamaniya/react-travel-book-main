@@ -33,7 +33,9 @@ function LoginPage() {
                         {showLogin && (
                             <>
                                 <LoginForm />
-                                <button>do not have account ? signUp </button>
+                                <button onClick={toggleLogin}>
+                                    do not have account ? signUp{" "}
+                                </button>
                             </>
                         )}
                         {!showLogin && (

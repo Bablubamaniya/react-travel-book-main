@@ -241,6 +241,18 @@
       "email": "bamaniybablu428@gmail.com",
       "password": "password124",
       "id": "2"
+    },
+    {
+      "id": "a05c",
+      "name": "bablu",
+      "email": "bamaniyabablu428@gmail.com",
+      "password": "Password1234"
+    },
+    {
+      "id": "ba18",
+      "name": "deepak",
+      "email": "deepak@gmail.com",
+      "password": "Password12345"
     }
   ]
 }
