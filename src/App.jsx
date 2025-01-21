@@ -17,6 +17,7 @@ import { CitiesProvider } from "./context/CityContext";
 import AddCityForm from "./components/AddCityForm";
 import City from "./components/City";
 import { AuthProvider } from "./context/UserContext";
+
 const AppRoutesV1 = function () {
     return (
         <BrowserRouter>
@@ -41,32 +42,37 @@ const AppRoutesV1 = function () {
         </BrowserRouter>
     );
 };
-const AppRoutesV2 = createBrowserRouter([
-    { path: "/", element: <HomePage /> },
-    { path: "/product", element: <ProductPage /> },
-    { path: "/account", element: <LoginPage /> },
-    {
-        path: "/app",
-        element: (
-            <CitiesProvider>
-                <AppPage />
-            </CitiesProvider>
-        ),
-        children: [
-            { index: true, element: <Navigate replace to="cities" /> },
-            { path: "cities", element: <CityList /> },
-            { path: "countries", element: <CountryList /> },
-            { path: "form", element: <AddCityForm /> },
-            { path: "city/:id", element: <City /> },
-        ],
-    },
-    { path: "*", element: <ErrorPage /> },
-]);
+
 function App() {
     // return <AppRoutesV1 />;
     return (
         <AuthProvider>
-            <RouterProvider router={AppRoutesV2} />
+            <RouterProvider
+                router={createBrowserRouter([
+                    { path: "/", element: <HomePage /> },
+                    { path: "/product", element: <ProductPage /> },
+                    { path: "/account", element: <LoginPage /> },
+                    {
+                        path: "/app",
+                        element: (
+                            <CitiesProvider>
+                                <AppPage />
+                            </CitiesProvider>
+                        ),
+                        children: [
+                            {
+                                index: true,
+                                element: <Navigate replace to="cities" />,
+                            },
+                            { path: "cities", element: <CityList /> },
+                            { path: "countries", element: <CountryList /> },
+                            { path: "form", element: <AddCityForm /> },
+                            { path: "city/:id", element: <City /> },
+                        ],
+                    },
+                    { path: "*", element: <ErrorPage /> },
+                ])}
+            />
         </AuthProvider>
     );
 }
