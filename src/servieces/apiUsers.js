@@ -9,22 +9,27 @@ export async function getUserByEmail(emailAddress) {
 }
 export async function loginUser(emailAddress, password) {
     const user = await getUserByEmail(emailAddress);
-    if (!user) throw new Error("wrong email or password");
+    if (!user)
+        throw new Error("wrong email or password", { cause: "form-error" });
     else {
         if (password === user.password) return user;
-        else throw new Error("wrong email or password");
+        else
+            throw new Error("wrong email or password", { cause: "form-error" });
     }
 }
 
 export async function signUpByUser({ name, email, password }) {
-    if(!name || !email || !password)
-        throw new Error("User input fields missing");
-    if(!validPassword(password))
-        throw new Error("Password must be 8+ chars with at least 1 uppercase,1 lowecase,and 1 number")
-    const response = await fetch(`${baseUrl}/users`,{
+    if (!name || !email || !password)
+        throw new Error("User input fields missing", { cause: "form-error" });
+    if (!validPassword(password))
+        throw new Error(
+            "Password must be 8+ chars with at least 1 uppercase,1 lowecase,and 1 number",
+            { cause: "password-error" }
+        );
+    const response = await fetch(`${baseUrl}/users`, {
         method: "POST",
-        headers: {"Content-Typpe": "application/json"},
-        body:JSON.stringify({name:name,email:email,password:password}),
+        headers: { "Content-Typpe": "application/json" },
+        body: JSON.stringify({ name: name, email: email, password: password }),
     });
     const data = await response.json();
     return data;

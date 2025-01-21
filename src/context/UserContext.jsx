@@ -5,20 +5,27 @@ const UserContext = createContext();
 
 const initialState = {
     user: null,
-    error: null,
+    error: {},
     loading: false,
 };
 
 const reducer = function (state, action) {
     switch (action.type) {
         case "user/login":
-            return { ...state, loading: false, user: action.Payload };
+            return { ...state, loading: false, user: action.payload };
         case "user/signUp":
-            return { ...state, loading: false, user: action.Payload };
+            return { ...state, loading: false, user: action.payload };
         case "user/logOut":
-            return {...initialState,}
+            return { ...initialState };
         case "error":
-            return { ...state, loading: false, error: action.Payload };
+            return {
+                ...state,
+                loading: false,
+                error: {
+                    type: action.payload.type,
+                    message: action.payload.message,
+                },
+            };
         case "loading":
             return { ...state, loading: false };
         default:
@@ -35,40 +42,46 @@ export function AuthProvider({ children }) {
             const user = await signUpByUser(newUser);
             dispatch({ type: "user/signup", payload: user });
         } catch (error) {
-            dispatch({ type: "error", payload: error.message });
+            dispatch({
+                type: "error",
+                payload: { type: error.cause, message: error.message },
+            });
         }
     }
 
     async function handleLogin(emailAddress, password) {
-
         try {
             dispatch({ type: "loading" });
-            const user = await loginUser(emailAddress,password);
+            const user = await loginUser(emailAddress, password);
             dispatch({ type: "user/login", payload: user });
         } catch (error) {
-            dispatch({ type: "error", payload: error.message });
+            dispatch({
+                type: "error",
+                payload: { type: error.cause, message: error.message },
+            });
         }
     }
-    function handleLogout(){
-        dispatch({type:"user/logOut"});
+    function handleLogout() {
+        dispatch({ type: "user/logOut" });
     }
 
     return (
-        <UserContext.Provider value={{
-            user:user,
-            error:error,
-            loading:loading,
-            handleLogin:handleLogin,
-            handleSignUp:handleSignUp,
-            handleLogout:handleLogout,
-        }} >{children}
+        <UserContext.Provider
+            value={{
+                user: user,
+                error: error,
+                loading: loading,
+                handleLogin: handleLogin,
+                handleSignUp: handleSignUp,
+                handleLogout: handleLogout,
+            }}
+        >
+            {children}
         </UserContext.Provider>
-    )
-
+    );
 }
 
-export function useUser(){
+export function useUser() {
     const context = useContext(UserContext);
-    if(context===undefined)
-        throw new Error("Trying to access ")
+    if (context === undefined) throw new Error("trying to access context outside the provider ");
 }
