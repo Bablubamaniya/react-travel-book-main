@@ -19,6 +19,7 @@ import { CitiesProvider } from "./context/CityContext";
 import AddCityForm from "./components/AddCityForm";
 import City from "./components/City";
 import { AuthProvider } from "./context/UserContext";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -51,6 +52,20 @@ function App() {
     // return <AppRoutesV1 />;
     return (
         <AuthProvider>
+            {/* <Toaster /> */}
+            <Toaster
+                position="bottom-right"
+                toastOptions={{
+                    duration: 5000,
+                    removeDelay: 1000,
+                    style: {
+                        background: "#fff9db",
+                        color: "#343a40",
+                        fontSize: "1.4rem",
+                        borderRadius: "0.4rem",
+                    },
+                }}
+            />
             <RouterProvider
                 router={createBrowserRouter([
                     { path: "/", element: <HomePage /> },
