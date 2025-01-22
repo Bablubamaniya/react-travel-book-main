@@ -3,6 +3,7 @@ import Map from "../components/Map";
 import style from "../styles/AppPage.module.css";
 import { useUser } from "../context/UserContext";
 import { Navigate } from "react-router";
+import User from "../components/User";
 function AppPage() {
     const { user } = useUser();
 
@@ -12,6 +13,7 @@ function AppPage() {
         <div className={style.appPage}>
             <SideBar />
             <Map />
+            <User />
         </div>
     );
 }

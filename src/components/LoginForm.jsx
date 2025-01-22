@@ -7,8 +7,8 @@ import { useUser } from "../context/UserContext";
 import FormError from "./FormError";
 
 function LoginForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("bamaniyabablu428@gmail.com");
+    const [password, setPassword] = useState("Password");
 
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -42,7 +42,7 @@ function LoginForm() {
                     disabled = {loading} required />
                 </div>
                 {!passwordError && <FormError txt={error.message} />}
-                <button>{loading ? "Login Up..." : "Login"}</button>
+                <button>{loading ? "Loggin in..." : "Login"}</button>
             </form>
         </>
     );

@@ -4,6 +4,11 @@
     gap: 4rem;
     padding-bottom: 4rem;
 }
+.toggleForm{
+    background-color: transparent;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+}
 
 .loginPage .loginSection {
     flex-grow: 1;
@@ -82,8 +87,10 @@
     padding: 1.2rem;
     border-radius: var(--radius-sm);
     font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.2s;
 }
 
 .formContainer form button:hover {
-    background-color: var(--color-main-yellow);
+    background-color: var(--color-main-yellow-light);
 }

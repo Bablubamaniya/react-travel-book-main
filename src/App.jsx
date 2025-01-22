@@ -1,3 +1,5 @@
+import "./global.css";
+
 import LoginPage from "./pages/LoginPage";
 import AppPage from "./pages/AppPage";
 import ProductPage from "./pages/ProductPage";
@@ -17,6 +19,8 @@ import { CitiesProvider } from "./context/CityContext";
 import AddCityForm from "./components/AddCityForm";
 import City from "./components/City";
 import { AuthProvider } from "./context/UserContext";
+
+
 
 const AppRoutesV1 = function () {
     return (

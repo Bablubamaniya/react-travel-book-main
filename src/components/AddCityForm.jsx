@@ -31,10 +31,12 @@ function AddCityForm() {
             async function fetchCityDetails() {
                 try {
                     setIsLoading(true);
-                    const url = `${BASE_URL}?latitude=${lat}&longitude=${lng}`;
+                    const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=23.259933&longitude=77.412613`;
                     const response = await fetch(url);
                     const data = await response.json();
                     const cityName = data.city;
+
+                    setCityNotFound(false);
                     if (!cityName) {
                         setCityNotFound(true);
                         resetCityDetails();
@@ -114,12 +116,12 @@ function AddCityForm() {
                 <div>
                     <label>City name</label>
                     <div className={styles.emojiInputBox}>
-                    <input
-                        type="text"
-                        defaultValue={cityDetails.cityName}
-                        disabled={true}
-                    />
-                    <span>{cityDetails.emoji}</span>
+                        <input
+                            type="text"
+                            defaultValue={cityDetails.cityName}
+                            disabled={true}
+                        />
+                        <span>{cityDetails.emoji}</span>
                     </div>
                 </div>
                 <div>
