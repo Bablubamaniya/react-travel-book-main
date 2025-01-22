@@ -2,15 +2,15 @@ import { useNavigate } from "react-router";
 import { useCities } from "../context/CityContext";
 import { formatDate } from "../helper";
 import styles from "../styles/cityItem.module.css";
-function CityItem({ city }) {
-    const { cityName, emoji, date, id, position } = city;
+function CityItem({ city,active }) {
+    const { cityName, emoji, date, id,} = city;
     const { handleRemoveCity, handleLoadCity } = useCities();
     const navigate = useNavigate();
      function navigateToCityRoute() {
         navigate(`/app/city/${id}`);
          handleLoadCity(id);
         
-        console.log("li clicked..");
+        // console.log("li clicked..");
     }
     function handleDelete(e) {
         e.stopPropagation();
@@ -18,7 +18,7 @@ function CityItem({ city }) {
     }
     return (
         <li onClick={navigateToCityRoute}>
-            <div className={styles.cityItem}>
+            <div className={`${styles.cityItem} ${active ? styles.activeCityItem:""}`}>
                 <span className={styles.emoji}>{emoji}</span>
                 <h3 className={styles.cityName}>{cityName}</h3>
                 <time className={styles.time}>{formatDate(date)}</time>

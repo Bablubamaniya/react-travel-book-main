@@ -4,7 +4,11 @@ import { loginUser, signUpByUser } from "../servieces/apiUsers";
 const UserContext = createContext();
 
 const initialState = {
-    user:null,
+    user: {
+        name: "Bablu Bamaniya",
+        email: "bamaniybablu428@gmail.com",
+        password: "password123",
+    },
     error: {},
     loading: false,
 };

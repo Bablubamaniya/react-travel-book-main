@@ -16,6 +16,9 @@
 .emoji {
     font-size: 2rem;
 }
+.activeCityItem{
+    background-color: var(--color-main-yellow);
+}
 
 .cityName {
     margin-left: 2rem;
