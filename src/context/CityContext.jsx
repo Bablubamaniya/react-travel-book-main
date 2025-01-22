@@ -9,7 +9,7 @@ import {
 
 const initialState = {
     cities: [],
-    city: [],
+    city: {},
     loading: false,
     error: null,
 };
@@ -136,6 +136,7 @@ const CitiesProvider = function ({ children }) {
 
     const valueObj = {
         cities: cities,
+        city: city,
         loading: loading,
         error: error,
         handleAddCity: handleAddCity,
