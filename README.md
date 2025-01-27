@@ -10,13 +10,12 @@
 
 ##
 
-<img style="width:80%" src="/public/screenshots/1.png">
+<img style="width:80%" src="./public/travel main page.jpg">
 <br><br>
-<img style="width:80%" src="/public/screenshots/2.png">
+<img style="width:80%" src="./public/loginPage.jpg">
 <br><br>
-<img style="width:80%" src="/public/screenshots/3.png">
-<br><br>
-<img style="width:80%" src="/public/screenshots/4.png">
+<img style="width:80%" src="./public/cityPage.jpg">
+
 
 ##
 
@@ -69,4 +68,3 @@ npm run dev
 [![License](https://img.shields.io/badge/license-MIT-85e2cd.svg)](https://opensource.org/license/mit/)
 
 Copyright (c) 2025 Bablu Bamaniya
-
