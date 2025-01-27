@@ -67,4 +67,8 @@ npm run dev
 
 [![License](https://img.shields.io/badge/license-MIT-85e2cd.svg)](https://opensource.org/license/mit/)
 
+<<<<<<< HEAD
 Copyright (c) 2025 Bablu Bamaniya
+=======
+Copyright (c) 2025 Bablu Bamaniya
+>>>>>>> db790d15ebf0e56303a75f1dcd5a9034ff155abe
