@@ -11,10 +11,9 @@ import useCurrentCoords from "../hooks/useCurrentCoords";
 
 const newYorkCoords = [40.712776,-74.005974];
 function Map() {
-    // 23.259933, and the longitude is 77.412613
     const [centerPos, setCenterPos] = useState([23.259933, 77.412613]);
     const { cities, city } = useCities();
-    
+
     const {position:currentPosition} = useCurrentCoords(...newYorkCoords);
 
 //change center

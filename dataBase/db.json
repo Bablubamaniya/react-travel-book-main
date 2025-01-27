@@ -253,6 +253,12 @@
       "name": "deepak",
       "email": "deepak@gmail.com",
       "password": "Password12345"
+    },
+    {
+      "id": "47c0",
+      "name": "radha",
+      "email": "radha@gmail.com",
+      "password": "Radha1234"
     }
   ]
 }

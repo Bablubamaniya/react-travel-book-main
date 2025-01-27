@@ -1,13 +1,22 @@
-import { useEffect, useState } from "react";
-import { useCities } from "../context/CityContext";
-import useQueryParams from "../hooks/useQueryParams";
 import styles from "../styles/addCityForm.module.css";
 import BackButton from "./BackButton";
+import useQueryParams from "../hooks/useQueryParams";
 import Message from "./Messege";
+import { useEffect, useState } from "react";
 import { formatDateForInputValue, getFlagEmoji } from "../helper";
 import Spinner from "./Spinner";
+import { useCities } from "../context/CityContext";
 import { useNavigate } from "react-router";
+
 const BASE_URL = `https://api.bigdatacloud.net/data/reverse-geocode-client`;
+//                        api.bigdatacloud.net/data/reverse-geocode-client
+
+// It's a good candidate for useReducer();
+
+// loading
+// cityDetaisl/load
+// reject
+
 function AddCityForm() {
     const { handleAddCity, loading: apiLoading, error: apiError } = useCities();
     const [lat, lng] = useQueryParams("lat", "lng");
@@ -15,40 +24,41 @@ function AddCityForm() {
     const [cityNotFound, setCityNotFound] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
     const [cityDetails, setCityDetails] = useState({
         cityName: "",
         country: "",
         emoji: "",
         date: new Date().toISOString(),
         notes: "",
-        position: {
-            lat: "",
-            lng: "",
-        },
+        position: { lat: "", lng: "" },
     });
+
     useEffect(
         function () {
             async function fetchCityDetails() {
                 try {
                     setIsLoading(true);
-                    const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=23.259933&longitude=77.412613`;
-                    const response = await fetch(url);
-                    const data = await response.json();
+                    const url = `${BASE_URL}?latitude=${lat}&longitude=${lng}`;
+                    const respose = await fetch(url);
+                    const data = await respose.json();
                     const cityName = data.city;
 
                     setCityNotFound(false);
+
                     if (!cityName) {
                         setCityNotFound(true);
                         resetCityDetails();
                         return;
                     }
+
                     setCityDetails(function (cityDetails) {
                         const updatedCityDetails = {
                             ...cityDetails,
-                            cityName: data.city || data.locality,
+                            cityName: cityName,
                             country: data.countryName,
                             emoji: getFlagEmoji(data.countryCode),
-                            notes: `A note about ${data.city || data.locality}`,
+                            notes: `A note about ${cityName}`,
                             position: {
                                 lat: lat,
                                 lng: lng,
@@ -66,6 +76,7 @@ function AddCityForm() {
         },
         [lat, lng]
     );
+
     function resetCityDetails() {
         return setCityDetails({
             cityName: "",
@@ -73,39 +84,43 @@ function AddCityForm() {
             emoji: "",
             date: new Date().toISOString(),
             notes: "",
-            position: {
-                lat: "",
-                lng: "",
-            },
+            position: { lat: "", lng: "" },
         });
     }
+
     function handleDateChange(e) {
-        setCityDetails(function (cityDetails) {
+        setCityDetails(function (citiyDetails) {
             return {
-                ...cityDetails,
+                ...citiyDetails,
                 date: new Date(e.target.value).toISOString(),
             };
         });
     }
+
     function handleNotesChange(e) {
         setCityDetails(function (cityDetails) {
             return { ...cityDetails, notes: e.target.value };
         });
     }
+
     async function handleSubmit(e) {
         e.preventDefault();
         await handleAddCity(cityDetails);
         navigate("/app/cities");
     }
+
     if (isLoading) {
         return <Spinner />;
     }
+
     if (!lat || !lng || cityNotFound) {
-        return <Message emoji=":hushed:" txt="Oops No City Found" />;
+        return <Message emoji="😯" txt="Oops! No city found!" />;
     }
+
     if (error || apiError) {
-        return <Message emoji=":boom:" txt={error} />;
+        return <Message emoji="💥" txt={error} />;
     }
+
     return (
         <div
             className={`${styles.addCityForm} ${
@@ -124,6 +139,7 @@ function AddCityForm() {
                         <span>{cityDetails.emoji}</span>
                     </div>
                 </div>
+
                 <div>
                     <label>When did you go to {cityDetails.cityName}</label>
                     <input
@@ -132,6 +148,7 @@ function AddCityForm() {
                         onChange={handleDateChange}
                     />
                 </div>
+
                 <div>
                     <label>How was your experience !</label>
                     <textarea
@@ -141,6 +158,7 @@ function AddCityForm() {
                         onChange={handleNotesChange}
                     />
                 </div>
+
                 <div className={styles.buttonBox}>
                     <BackButton />
                     <button type="primary">Add</button>
@@ -149,4 +167,5 @@ function AddCityForm() {
         </div>
     );
 }
+
 export default AddCityForm;

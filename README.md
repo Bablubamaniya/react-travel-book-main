@@ -1,97 +1,70 @@
-//////////////////////////////////////////////
-///////////// PROJECT REQUIREMENTS ///////////
-//////////////////////////////////////////////
+# React trevel Book
 
-PAGES :
+<div align="center">
+<h4> React Travel Book helps travelers document their journeys by adding cities with experience notes. Featuring an interactive map powered by React Leaflet and OpenStreetMap, users can navigate, explore, and add cities directly on the map. Built with React, React Router v6, useReducer, and Context API, it offers a seamless way to capture travel experiences.</h4>
 
-        ( All users )
+[![Repo Type](https://img.shields.io/badge/repo_type-Public-fcc419?style=flat&link=https://github.com/arpitjana21/SafarSathi-BookToursOnline)](https://github.com/arpitjana21/SafarSathi-BookToursOnline)
+![version](https://img.shields.io/badge/npm-v9.5.0-red)
+![version](https://img.shields.io/badge/node-v18.15.0-green)
+[![License](https://img.shields.io/badge/license-MIT-85e2cd.svg)](https://opensource.org/license/mit/)
 
-            1. "/"               --> Home Page
-            2. "/home"           --> Home Page
-            3. "/pricing"        --> Pricing Page
-            4. "/product"        --> Product Page
-            5. "/login"          --> Login Page
+##
 
-        ( Authenticated Users )
+<img style="width:80%" src="./public/travel main page.jpg">
+<br><br>
+<img style="width:80%" src="./public/loginPage.jpg">
+<br><br>
+<img style="width:80%" src="./public/cityPage.jpg">
 
-            6. "/app"            -->
-            7. "/app/cities"     --> a. Load City List,    b. Load Map
-            8. "/app/countries"  --> a. Load Country List, b. Load Map
 
-//// HOME PAGE
+##
 
-1. Nav
-2. Hero
-   2.1. Description
-   2.2. CTA
+</div>
 
-//// PRICING PAGE
+## Tech & Tools
 
-1.  Nav
-2.  PricingDetails
+![Tech Stack](https://skillicons.dev/icons?i=react,redux,tailwind,nodejs)
 
-//// PRODUCT PAGE
+![Dev Tools](https://skillicons.dev/icons?i=vscode,git,github,postman)
 
-1.  Nav
-2.  ProductDetails
+## Getting Started
 
-//// LOGIN PAGE
+**Step 1** : Install `npm packages`
 
-1. Nav
-2. Login Form
+```
+npm install
+```
 
-//// APP PAGE
+**Step 2** : Run
 
-AppPage (cities, isLoading, error)
+```
+npm run dev
+```
 
-    SideBar
+**Step 3** : Must have VS-Code Extentions
 
-        1.1 CityList
-            1.1.1 City
-            1.1.1 City
-            1.1.1 City
-            1.1.1 City
-            1.1.1 City
+```
+1. Prettier-Code formatter
+2. ESLint
+```
 
-        1.2 CountryList
-        1.3 CityDetails
-        1.4 AddCityForm
+## Features
 
-2. Map
+#### User and Admin Management:
 
-\*\* Component Tree / React Element Tree / (Virtual DOM)
+1. Users can browse a list of cities using React-Router data-loading.
+2. Add City-Form  functionality is implemented with leaflet Map.
+3. city can be add or delete in the city list.
+4. Orders can be searched by their ID using React-Router v6.
+5. Tailwind CSS is used to create a modern and responsive design.
 
--   App
-    -   HomePage
-    -   ProductPage
-    -   LoginPage
-    -   CityProvider (cities)
-        -   AppPage
-            -   SideBar
-                -   AppNav
-                -   CityList
-                    -   CityItem
-                    -   CityItem
-                    -   CityItem
-                    -   CityItem
-                -   CountryList
-                -   AddCityForm
-                -   City
-            -   Map
+## Contact Me
 
-/// useReducer Plan
+[![GitHub ](https://img.shields.io/badge/GitHub-@bablubamaniya1007-orange?style=flat&logo=GitHub&link=https://github.com/bablubamaniya1007)](https://github.com/bablubamaniya1007)
+[![LinkedIn ](https://img.shields.io/badge/LinkedIn-@bablubamaniya1007-0077b5?style=flat&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/bablubamaniya1007/)](https://www.linkedin.com/in/bablubamaniya1007/)
 
---> action 1 : "cities/load"
---> action 2 : "city/load"
---> action 3 : "city/delete"
---> action 4 : "city/update"
---> action 5 : "city/create"
---> action 6 : "loading"
---> action 7 : "rejected"
+## LISENSE
 
-state = {
-cities: [],
-city: null,
-loading: false,
-error: null
-}
+[![License](https://img.shields.io/badge/license-MIT-85e2cd.svg)](https://opensource.org/license/mit/)
+
+Copyright (c) 2025 Bablu Bamaniya

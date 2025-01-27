@@ -1,38 +1,52 @@
-// import React from "react";
-
 import { useState } from "react";
-import Emoji from "./Emoji";
 import { useUser } from "../context/UserContext";
-import { useNavigate } from "react-router";
 import FormError from "./FormError";
+import { useNavigate } from "react-router";
+
+// SignUp form LifeCycle
+
+// Mount
+// error = {}
+// if(error.message === undefined ) navigate("/app")   ====> True
+
+// Rerender ( handleSignUp -- error )
+// error = {message : "errorMessage", type: "errorType"}
+
+// Rerender ( handleSignUp -- success )
+// error = {}
+// if(error.message === undefined ) navigate("/app")   ====> True
 
 function SignUpForm() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleNameChange = (e) => setName(e.target.value);
-    const handleEmailChange = (e) => setEmail(e.target.value);
-    const handlePasswordChange = (e) => setPassword(e.target.value);
-
     const { handleSignUp, loading, error } = useUser();
     const passwordError = error.type === "password-error";
 
     const navigate = useNavigate();
 
-    async function handleSubmit(e) {
+    const handleNameChange = (e) => setName(e.target.value);
+    const handleEmailChange = (e) => setEmail(e.target.value);
+    const handlePasswordChange = (e) => setPassword(e.target.value);
+
+    function handleSubmit(e) {
         e.preventDefault();
-        await handleSignUp(
-            { name: name, email: email, password: password },
-            () => navigate("/app")
+        handleSignUp({ name: name, email: email, password: password }, () =>
+            navigate("/app")
         );
+        // if (error.message === undefined) navigate("/app");
+        // We cann't access updated state immediately, it will be available after rerender
     }
+
+    // if (error.message === undefined) navigate("/app");
+    // 1. Mounting Phase
+    // 2. Rerender >> handleSignUp(success)
+
     return (
         <>
-            <h1>
-                Creat New Account <Emoji txt="✈️" />
-            </h1>
-            <form className="." onSubmit={handleSubmit}>
+            <h1>Create New Accout</h1>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name</label>
                     <input
@@ -40,8 +54,8 @@ function SignUpForm() {
                         id="name"
                         value={name}
                         onChange={handleNameChange}
-                        required
                         disabled={loading}
+                        required
                     />
                 </div>
 
@@ -52,14 +66,14 @@ function SignUpForm() {
                         id="email"
                         value={email}
                         onChange={handleEmailChange}
-                        required
                         disabled={loading}
+                        required
                     />
                 </div>
 
                 <div>
                     <label htmlFor="password">
-                        Password{" "}
+                        Password
                         {passwordError && <FormError txt={error.message} />}
                     </label>
                     <input
@@ -67,13 +81,14 @@ function SignUpForm() {
                         id="password"
                         value={password}
                         onChange={handlePasswordChange}
-                        required
                         disabled={loading}
+                        required
                     />
                 </div>
+
                 {!passwordError && <FormError txt={error.message} />}
 
-                <button>{loading ? "Signing Up..." : "SignUp"}</button>
+                <button>{loading ? "Signing up..." : "Sign Up"}</button>
             </form>
         </>
     );
